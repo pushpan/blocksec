@@ -13,8 +13,8 @@ body {
     line-height: 1.6;
 }
 
-/* ===== 粒子背景效果 ===== */
-.particles {
+/* ===== 背景效果容器 ===== */
+.background-effects {
     position: fixed;
     top: 0;
     left: 0;
@@ -22,6 +22,16 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 1;
+}
+
+/* ===== 粒子背景效果 ===== */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
 .particle {
@@ -38,6 +48,168 @@ body {
     20% { opacity: 1; }
     80% { opacity: 1; }
     100% { transform: translateY(-100px); opacity: 0; }
+}
+
+/* ===== 区块链网络可视化 ===== */
+.blockchain-network {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* 网络节点样式 */
+.network-node {
+    position: absolute;
+    background: radial-gradient(circle, rgba(100, 200, 255, 0.8) 0%, rgba(100, 200, 255, 0.2) 70%, transparent 100%);
+    border-radius: 50%;
+    animation: pulse-node 3s infinite ease-in-out;
+}
+
+.network-node.large {
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, rgba(157, 100, 255, 0.9) 0%, rgba(157, 100, 255, 0.3) 70%, transparent 100%);
+    box-shadow: 0 0 20px rgba(157, 100, 255, 0.5);
+}
+
+.network-node.medium {
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, rgba(100, 200, 255, 0.8) 0%, rgba(100, 200, 255, 0.2) 70%, transparent 100%);
+    box-shadow: 0 0 15px rgba(100, 200, 255, 0.4);
+}
+
+.network-node.small {
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, rgba(255, 200, 100, 0.7) 0%, rgba(255, 200, 100, 0.1) 70%, transparent 100%);
+    box-shadow: 0 0 10px rgba(255, 200, 100, 0.3);
+}
+
+@keyframes pulse-node {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* 网络连接线 */
+.network-connection {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(100, 200, 255, 0.6) 20%, 
+        rgba(100, 200, 255, 0.8) 50%,
+        rgba(100, 200, 255, 0.6) 80%, 
+        transparent 100%
+    );
+    transform-origin: left center;
+    animation: data-flow 4s infinite linear;
+}
+
+.network-connection.active {
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(157, 100, 255, 0.8) 20%, 
+        rgba(157, 100, 255, 1) 50%,
+        rgba(157, 100, 255, 0.8) 80%, 
+        transparent 100%
+    );
+    box-shadow: 0 0 6px rgba(157, 100, 255, 0.5);
+}
+
+@keyframes data-flow {
+    0% { opacity: 0.3; transform: scaleX(0.8); }
+    50% { opacity: 1; transform: scaleX(1); }
+    100% { opacity: 0.3; transform: scaleX(0.8); }
+}
+
+/* 数据流动点 */
+.data-packet {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(100, 255, 200, 1);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(100, 255, 200, 0.8);
+    animation: packet-flow 6s infinite linear;
+}
+
+@keyframes packet-flow {
+    0% { opacity: 0; transform: scale(0.5); }
+    10% { opacity: 1; transform: scale(1); }
+    90% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.5); }
+}
+
+/* 资金流向指示器 */
+.fund-flow-indicator {
+    position: absolute;
+    pointer-events: none;
+}
+
+.flow-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 3px 0 3px 8px;
+    border-color: transparent transparent transparent rgba(100, 255, 200, 0.8);
+    animation: arrow-glow 2s infinite ease-in-out;
+}
+
+@keyframes arrow-glow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 3px rgba(100, 255, 200, 0.6));
+        opacity: 0.7;
+    }
+    50% { 
+        filter: drop-shadow(0 0 8px rgba(100, 255, 200, 1));
+        opacity: 1;
+    }
+}
+
+/* 区块链分析HUD界面 */
+.analysis-hud {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 200px;
+    height: 120px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(100, 200, 255, 0.3);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    animation: hud-flicker 5s infinite;
+}
+
+@keyframes hud-flicker {
+    0%, 98%, 100% { opacity: 0.8; }
+    99% { opacity: 1; }
+}
+
+.hud-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 2px 0;
+}
+
+.hud-value {
+    color: #64c8ff;
+}
+
+.hud-status {
+    color: #4CAF50;
+}
+
+.hud-warning {
+    color: #FF9800;
 }
 
 /* ===== 布局容器 ===== */
@@ -528,6 +700,13 @@ body {
 
     .services, .app-showcase, .advantages, .contact {
         padding: 60px 0;
+    }
+
+    .analysis-hud {
+        width: 150px;
+        height: 100px;
+        font-size: 8px;
+        padding: 8px;
     }
 }
 
